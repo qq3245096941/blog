@@ -1,0 +1,30 @@
+{layout name='base'}
+<div class="card alert">
+    <div class="card-body">
+        <table class="table table-responsive table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>名称</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='classify_list' id='classify'}
+            <tr>
+                <th>{$classify.id}</th>
+                <td>{$classify.name}</td>
+                <td>{$classify.sort}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-success" href="/page/classify/create/{$classify.id}">修改</a>
+                        <a class="btn btn-danger" href="/classify/delete/{$classify.id}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</div>
