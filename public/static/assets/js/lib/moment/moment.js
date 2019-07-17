@@ -1,6 +1,6 @@
-//! moment.js
+//! moment.bootstrap
 //! version : 2.10.6
-//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! authors : Tim Wood, Iskren Chernev, Moment.bootstrap contributors
 //! license : MIT
 //! momentjs.com
 
@@ -828,7 +828,7 @@
     }
 
     utils_hooks__hooks.createFromInputFallback = deprecate(
-        'moment construction falls back to js Date. This is ' +
+        'moment construction falls back to bootstrap Date. This is ' +
         'discouraged and will be removed in upcoming major ' +
         'release. Please refer to ' +
         'https://github.com/moment/moment/issues/1407 for more info.',

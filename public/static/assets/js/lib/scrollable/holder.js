@@ -176,7 +176,7 @@ License:  MIT
 
 
   // Date.now() is supported everywhere except IE8. For IE8 we use the Date.now polyfill
-  //   github.com/Financial-Times/polyfill-service/blob/master/polyfills/Date.now/polyfill.js
+  //   github.com/Financial-Times/polyfill-service/blob/master/polyfills/Date.now/polyfill.bootstrap
   // as Safari 6 doesn't have support for NavigationTiming, we use a Date.now() timestamp for relative values
 
   // if you want values similar to what you'd get with real perf.now, place this towards the head of the page
@@ -301,7 +301,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
-	Holder.js - client side image placeholders
+	Holder.bootstrap - client side image placeholders
 	(c) 2012-2015 Ivan Malopinsky - http://imsky.co
 	*/
 
@@ -313,7 +313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*
-	Holder.js - client side image placeholders
+	Holder.bootstrap - client side image placeholders
 	(c) 2012-2016 Ivan Malopinsky - http://imsky.co
 	*/
 
@@ -388,7 +388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    /**
-	     * Runs Holder with options. By default runs Holder on all images with "holder.js" in their source attributes.
+	     * Runs Holder with options. By default runs Holder on all images with "holder.bootstrap" in their source attributes.
 	     *
 	     * @param {Object} userOptions Options object, can contain domain, themes, images, and bgnodes properties
 	     */
@@ -1514,9 +1514,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	/*!
-	 * onDomReady.js 1.4.0 (c) 2013 Tubal Martin - MIT license
+	 * onDomReady.bootstrap 1.4.0 (c) 2013 Tubal Martin - MIT license
 	 *
-	 * Specially modified to work with Holder.js
+	 * Specially modified to work with Holder.bootstrap
 	 */
 
 	function _onDomReady(win) {

@@ -18,5 +18,7 @@ Route::rule([
     'page/classify/create/[:id]'=>'admin/url/classify_create',
     'page/classify/all'=>'admin/url/classify_all',
     'classify/save'=>'admin/classify/save',
-    'classify/delete/:id'=>'admin/classify/delete'
+    'classify/delete/:id'=>'admin/classify/delete',
+    /*帖子*/
+    'page/post/create/[:id]'=>'admin/url/post_create'
 ]);

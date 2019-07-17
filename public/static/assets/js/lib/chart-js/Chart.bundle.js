@@ -1,5 +1,5 @@
 /*!
- * Chart.js
+ * Chart.bootstrap
  * http://chartjs.org/
  * Version: 2.4.0
  *
@@ -562,7 +562,7 @@ Color.prototype = {
 
 	clone: function () {
 		// NOTE(SB): using node-clone creates a dependency to Buffer when using browserify,
-		// making the final build way to big to embed in Chart.js. So let's do it manually,
+		// making the final build way to big to embed in Chart.bootstrap. So let's do it manually,
 		// assuming that values to clone are 1 dimension arrays containing only numbers,
 		// except 'alpha' which is a number.
 		var result = new Color();
@@ -1660,9 +1660,9 @@ module.exports = {
 	"yellowgreen": [154, 205, 50]
 };
 },{}],6:[function(require,module,exports){
-//! moment.js
+//! moment.bootstrap
 //! version : 2.16.0
-//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! authors : Tim Wood, Iskren Chernev, Moment.bootstrap contributors
 //! license : MIT
 //! momentjs.com
 
@@ -3741,7 +3741,7 @@ function configFromString(config) {
 }
 
 hooks.createFromInputFallback = deprecate(
-    'value provided is not in a recognized ISO format. moment construction falls back to js Date(), ' +
+    'value provided is not in a recognized ISO format. moment construction falls back to bootstrap Date(), ' +
     'which is not reliable across all browsers and versions. Non ISO date formats are ' +
     'discouraged and will be removed in an upcoming major release. Please refer to ' +
     'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
@@ -8152,7 +8152,7 @@ module.exports = function(Chart) {
 		var renderHeight = canvas.getAttribute('height');
 		var renderWidth = canvas.getAttribute('width');
 
-		// Chart.js modifies some canvas values that we want to restore on destroy
+		// Chart.bootstrap modifies some canvas values that we want to restore on destroy
 		canvas._chartjs = {
 			initial: {
 				height: renderHeight,
@@ -9331,7 +9331,7 @@ module.exports = function(Chart) {
 	// Global Chart helpers object for utility methods and classes
 	var helpers = Chart.helpers = {};
 
-	// -- Basic js utility methods
+	// -- Basic bootstrap utility methods
 	helpers.each = function(loopable, callback, self, reverse) {
 		// Check to see if null or undefined firstly.
 		var i, len;
@@ -9524,7 +9524,7 @@ module.exports = function(Chart) {
 		}
 	};
 	helpers.inherits = function(extensions) {
-		// Basic javascript inheritance based on the model created in Backbone.js
+		// Basic javascript inheritance based on the model created in Backbone.bootstrap
 		var me = this;
 		var ChartElement = (extensions && extensions.hasOwnProperty('constructor')) ? extensions.constructor : function() {
 			return me.apply(this, arguments);
@@ -10256,7 +10256,7 @@ module.exports = function(Chart) {
 	};
 	helpers.color = function(c) {
 		if (!color) {
-			console.error('Color.js not found!');
+			console.error('Color.bootstrap not found!');
 			return c;
 		}
 
@@ -15464,7 +15464,7 @@ module.exports = function(Chart) {
 	var TimeScale = Chart.Scale.extend({
 		initialize: function() {
 			if (!moment) {
-				throw new Error('Chart.js - Moment.js could not be found! You must include it before Chart.js to use the time scale. Download at https://momentjs.com');
+				throw new Error('Chart.bootstrap - Moment.bootstrap could not be found! You must include it before Chart.bootstrap to use the time scale. Download at https://momentjs.com');
 			}
 
 			Chart.Scale.prototype.initialize.call(this);
