@@ -11,14 +11,24 @@
 
 use think\Route;
 
-Route::rule([
-    /*总览*/
-    '/'=>'admin/url/index',
-    /*分类*/
-    'page/classify/create/[:id]'=>'admin/url/classify_create',
-    'page/classify/all'=>'admin/url/classify_all',
-    'classify/save'=>'admin/classify/save',
-    'classify/delete/:id'=>'admin/classify/delete',
-    /*帖子*/
-    'page/post/create/[:id]'=>'admin/url/post_create'
+Route::get("/",'admin/url/index');
+
+Route::group('classify', [
+    /*页面*/
+    'all' => 'admin/url/classify_all',
+    'create/[:id]' => 'admin/url/classify_create',
+    /*删除*/
+    'delete/:id' => 'admin/classify/delete',
+    /*保存*/
+    'save' => ['admin/classify/save', ['method' => 'post']]
+]);
+
+Route::group('post',[
+   /*页面*/
+   'all'=>'admin/url/post_all',
+   'create/[:id]'=>'admin/url/post_create',
+    /*删除*/
+    'delete/:id'=>'admin/post/delete',
+    /*保存*/
+    'save'=>['admin/post/save',['method'=>'post']]
 ]);

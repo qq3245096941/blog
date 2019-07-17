@@ -9,17 +9,26 @@ use think\Controller;
 class ClassifyController extends Controller
 {
 
-    /*创建一个分类*/
+    /*创建，或者修改一个分类*/
     public function save()
     {
         $classify = new Classify();
-        $classify->save(
-            [
+
+        if (input('id')) {
+            $classify->save(
+                [
+                    'name' => input('name'),
+                    'sort' => input('sort')
+                ], ['id' => input('id')]
+            );
+        } else {
+            $classify->data([
                 'name' => input('name'),
                 'sort' => input('sort')
-            ],['id'=>input('id')]
-        );
-        $this->success("保存成功", "/page/classify/all");
+            ]);
+            $classify->save();
+        }
+        $this->success("保存成功", "/classify/all");
     }
 
     /**
@@ -28,6 +37,6 @@ class ClassifyController extends Controller
     public function delete()
     {
         Classify::destroy(['id' => input('id')]);
-        $this->success("删除成功", '/page/classify/all');
+        $this->success("删除成功", '/classify/all');
     }
 }

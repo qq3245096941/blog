@@ -4,6 +4,7 @@
 namespace app\admin\controller;
 
 use app\admin\model\Classify;
+use app\admin\model\Post;
 use http\Client\Curl\User;
 use think\Controller;
 use think\Db;
@@ -27,24 +28,36 @@ class UrlController extends Controller
      */
     public function post_all()
     {
-
-    }
-
-    public function post_create(){
-        /*获取所有分类*/
-        $this->assign("classify_list",Classify::all());
-
-        return $this->create_url('创建帖子','post','post/create');
+        $post = new Post();
+        $post_list = $post->order("create_time")->select();
+        $this->assign('post_list', $post_list);
+        return $this->create_url('所有帖子', 'post', 'post/all');
     }
 
     /**
-     * 获取所有的分类
-     * @return UrlController
-     * @throws \think\exception\DbException
+     * 创建帖子
+     */
+    public function post_create()
+    {
+        $classify_list = Classify::all();
+        $this->assign("classify_list", $classify_list);
+        $this->assign("currentClassify",$classify_list[0]);
+
+        if (input('id')) {
+            $post = Post::get(input('id'));
+            $currentClassify = Classify::get(['id'=>$post->classify_id]);
+
+            $this->assign('post', $post)->assign('currentClassify',$currentClassify);
+        }
+        return $this->create_url('创建帖子', 'post', 'post/create');
+    }
+
+    /**
+     * 所有分类
      */
     public function classify_all()
     {
-        $classify_list = Db::table(config('database')['prefix'].'classify')->order('sort')->select();
+        $classify_list = Db::table(config('database')['prefix'] . 'classify')->order('sort')->select();
         $this->assign("classify_list", $classify_list);
         return $this->create_url('所有分类', 'classify', 'classify/all');
     }
@@ -67,8 +80,8 @@ class UrlController extends Controller
      * @param string $nav_title 当前导航的标示
      * @return UrlController
      */
-    private function create_url($title = '', $nav_title = '', $url = '')
+    private function create_url($title = '', $nav_title = '', $template_url = '')
     {
-        return $this->assign("title", $title)->assign("nav", [$nav_title => 'active open'])->fetch($url);
+        return $this->assign("title", $title)->assign("nav", [$nav_title => 'active open'])->fetch($template_url);
     }
 }
