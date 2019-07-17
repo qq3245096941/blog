@@ -13,6 +13,10 @@ use think\Route;
 
 Route::get("/",'admin/url/index');
 
+Route::pattern([
+    'id'=> '\d+',
+]);
+
 Route::group('classify', [
     /*页面*/
     'all' => 'admin/url/classify_all',
@@ -30,5 +34,6 @@ Route::group('post',[
     /*删除*/
     'delete/:id'=>'admin/post/delete',
     /*保存*/
-    'save'=>['admin/post/save',['method'=>'post']]
+    'save'=>['admin/post/save',['method'=>'post']],
+    'classify_id/[:id]'=>['admin/url/post_by_classify']
 ]);

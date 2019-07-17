@@ -19,7 +19,7 @@ class UrlController extends Controller
      */
     public function index()
     {
-
+        $this->assign('post_list',Post::all());
         return $this->create_url('总览', 'index', "index/index");
     }
 
@@ -30,7 +30,27 @@ class UrlController extends Controller
     {
         $post = new Post();
         $post_list = $post->order("create_time")->select();
-        $this->assign('post_list', $post_list);
+        //classify_id表示点击“全部”标签
+        $this->assign('post_list', $post_list)->assign("classify_list",Classify::all())->assign('classify_id',-1);
+        return $this->create_url('所有帖子', 'post', 'post/all');
+    }
+
+    /**
+     * 通过类获取当前所有帖子
+     */
+    public function post_by_classify(){
+        $post = new Post();
+
+        if(input('id')){
+            $post_list = $post->where(['classify_id'=>input("id")])->order('create_time')->select();
+            $this->assign('classify_id',input('id'));
+        }else{
+            $post_list = $post->order('create_time')->select();
+            $this->assign('classify_id',-1);
+        }
+
+        $this->assign('post_list', $post_list)->assign("classify_list",Classify::all());
+
         return $this->create_url('所有帖子', 'post', 'post/all');
     }
 

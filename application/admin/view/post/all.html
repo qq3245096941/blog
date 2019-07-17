@@ -1,7 +1,31 @@
 {layout name='base'}
-<div class="card alert">
-    <div class="card-body">
-        <table class="table table-responsive table-striped">
+
+<div class="card">
+     <a class="btn btn-success" href="/post/create">添加帖子</a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <!--导航-->
+        <ul class="nav nav-tabs">
+            <li class="{$classify_id==-1?'active':''}">
+                <a href="/post/classify_id">
+                    全部&nbsp;{if $classify_id==null}<span class="badge badge-danger">{$post_list|count}</span>{/if}
+                </a>
+
+            </li>
+            {volist name='classify_list' id='classify'}
+            <li class="{$classify_id==$classify.id?'active':''}">
+                <a href="/post/classify_id/{$classify.id}">
+                    {$classify.name}&nbsp;{if $classify_id==$classify.id}<span class="badge badge-danger">{$post_list|count}</span>{/if}
+                </a>
+
+            </li>
+            {/volist}
+        </ul>
+    </div>
+    <div class="card-content">
+        <table class="table table-responsive table-striped table-hover">
             <thead>
             <tr>
                 <th>id</th>
