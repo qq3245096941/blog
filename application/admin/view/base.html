@@ -9,18 +9,16 @@
     <!-- Styles -->
     <link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="/static/assets/css/lib/mmc-chat.css" rel="stylesheet"/>
     <link href="/static/assets/css/lib/sidebar.css" rel="stylesheet">
     <link href="/static/assets/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="/static/assets/css/lib/nixon.css" rel="stylesheet">
     <link href="/static/assets/lib/lobipanel/css/lobipanel.min.css" rel="stylesheet">
     <link href="/static/assets/css/style.css" rel="stylesheet">
 
-    <script src="/static/assets/js/lib/bootstrap.min.js"></script>
     <!-- /# content wrap -->
     <script src="/static/assets/js/lib/jquery.min.js"></script>
+    <script src="/static/assets/js/lib/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
-
     <!--文件上传-->
     <link rel="stylesheet" href="/static/bootstrap/fileinput.min.css">
     <script src="/static/bootstrap/fileinput.min.js"></script>
@@ -28,6 +26,14 @@
 
     <!--编辑器-->
     <script src="https://cdn.bootcss.com/showdown/1.9.0/showdown.min.js"></script>
+
+    <!--图表-->
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.min.js"></script>
+
+    <!--代码高亮-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
@@ -111,7 +117,6 @@
             <!--内容-->
             <div class="main-content">
                 {__CONTENT__}
-
                 追风的模样人的博客
             </div>
         </div>
@@ -124,22 +129,10 @@
 <!-- nano scroller -->
 <script src="/static/assets/js/lib/sidebar.js"></script>
 
-<!-- bootstrap -->
-<script src="/static/assets/js/lib/mmc-common.js"></script>
-<script src="/static/assets/js/lib/mmc-chat.js"></script>
-<!--  Chart bootstrap -->
-<script src="/static/assets/js/lib/chart-js/Chart.bundle.js"></script>
-<script src="/static/assets/js/lib/chart-js/chartjs-init.js"></script>
-<!-- // Chart bootstrap -->
-<!--  Datamap -->
-<script src="/static/assets/js/lib/datamap/d3.min.js"></script>
-<script src="/static/assets/js/lib/datamap/topojson.js"></script>
-<script src="/static/assets/js/lib/datamap/datamaps.world.min.js"></script>
-<script src="/static/assets/js/lib/datamap/datamap-init.js"></script>
 <script src="/static/assets/lib/lobipanel/js/lobipanel.js"></script>
 
 <!-- // Datamap -->
-<script src="assets/js/scripts.js"></script>
+<script src="/static/assets/js/scripts.js"></script>
 <!-- scripit init-->
 <script>
     $(document).ready(function () {

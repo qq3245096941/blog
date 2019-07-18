@@ -29,16 +29,15 @@
                         <option value="{$currentClassify.id}">{$currentClassify.name}</option>
                         {/if}
                         {volist name='classify_list' id='classify'}
-                            {if $classify.name!=$currentClassify.name}
-                                <option value="{$classify.id}">{$classify.name}</option>
-                            {/if}
+                        {if $classify.name!=$currentClassify.name}
+                        <option value="{$classify.id}">{$classify.name}</option>
+                        {/if}
                         {/volist}
                     </select>
                 </div>
             </div>
 
             <div class="row">
-
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">内容</label>
@@ -47,8 +46,8 @@
                                       placeholder="markdown语法">{$post.body|default=''}</textarea>
                             <hr>
                             <div class="btn-group btn-group-xs">
-                                <button class="btn btn-success">上传图片</button>
-                                <button class="btn btn-default">上传截图</button>
+                                <button class="btn btn-success update_img" type="button">上传图片</button>
+                                <button class="btn btn-default" type="button">上传截图</button>
                             </div>
                         </div>
                     </div>
@@ -60,6 +59,7 @@
                     </div>
                 </div>
             </div>
+
             <button class="btn btn-success" type="submit">保存</button>
         </form>
     </div>
@@ -72,6 +72,11 @@
         $(".body").on("input propertychange", function () {
             let html = converter.makeHtml($(this).val());
             $(".html").html(html);
+
+            $(".html pre code").each((index,element)=>{
+                $(element).css("background",'#f5f5f5');
+                hljs.highlightBlock(element);
+            });
         });
 
         $('form').bootstrapValidator({
@@ -87,8 +92,8 @@
                             message: '标题不能为空'
                         },
                         stringLength: {
-                            max: 15,
-                            message: '最多设置15个字符'
+                            max: 100,
+                            message: '最多设置100个字符'
                         },
                     }
                 },

@@ -10,7 +10,7 @@
         <ul class="nav nav-tabs">
             <li class="{$classify_id==-1?'active':''}">
                 <a href="/post/classify_id">
-                    全部&nbsp;{if $classify_id==null}<span class="badge badge-danger">{$post_list|count}</span>{/if}
+                    全部&nbsp;{if $classify_id==-1}<span class="badge badge-danger">{$post_list|count}</span>{/if}
                 </a>
 
             </li>
@@ -19,7 +19,6 @@
                 <a href="/post/classify_id/{$classify.id}">
                     {$classify.name}&nbsp;{if $classify_id==$classify.id}<span class="badge badge-danger">{$post_list|count}</span>{/if}
                 </a>
-
             </li>
             {/volist}
         </ul>

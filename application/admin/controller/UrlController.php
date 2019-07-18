@@ -1,14 +1,11 @@
 <?php
 
-
 namespace app\admin\controller;
-
 use app\admin\model\Classify;
 use app\admin\model\Post;
 use http\Client\Curl\User;
 use think\Controller;
 use think\Db;
-
 /**
  * 路径跳转专用控制器，传入两个参数，$title，$nav
  */
@@ -20,6 +17,7 @@ class UrlController extends Controller
     public function index()
     {
         $this->assign('post_list',Post::all());
+        $this->assign("classify_list",Classify::all());
         return $this->create_url('总览', 'index', "index/index");
     }
 
