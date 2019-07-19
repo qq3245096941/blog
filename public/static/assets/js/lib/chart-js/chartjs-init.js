@@ -47,7 +47,7 @@
             responsive: true,
 
             tooltips: {
-                mode: 'index',
+                mode: 'home.html',
                 titleFontSize: 12,
                 titleFontColor: '#000',
                 bodyFontColor: '#000',
@@ -137,7 +137,7 @@
         options: {
             responsive: true,
             tooltips: {
-                mode: 'index',
+                mode: 'home.html',
                 titleFontSize: 12,
                 titleFontColor: '#000',
                 bodyFontColor: '#000',
@@ -282,7 +282,7 @@
         options: {
             responsive: true,
             tooltips: {
-                mode: 'index',
+                mode: 'home.html',
                 intersect: false
             },
             hover: {

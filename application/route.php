@@ -11,13 +11,11 @@
 
 use think\Route;
 
-Route::get("/",'admin/url/index');
-
 Route::pattern([
     'id'=> '\d+',
 ]);
 
-Route::group('classify', [
+Route::group('admin/classify', [
     /*页面*/
     'all' => 'admin/url/classify_all',
     'create/[:id]' => 'admin/url/classify_create',
@@ -26,8 +24,7 @@ Route::group('classify', [
     /*保存*/
     'save' => ['admin/classify/save', ['method' => 'post']]
 ]);
-
-Route::group('post',[
+Route::group('admin/post',[
    /*页面*/
    'all'=>'admin/url/post_all',
    'create/[:id]'=>'admin/url/post_create',
@@ -37,3 +34,9 @@ Route::group('post',[
     'save'=>['admin/post/save',['method'=>'post']],
     'classify_id/[:id]'=>['admin/url/post_by_classify']
 ]);
+
+Route::get("admin",'admin/url/main');
+
+/*前台模块*/
+Route::get("/",'index/index/home');
+

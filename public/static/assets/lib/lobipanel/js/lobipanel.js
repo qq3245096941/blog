@@ -88,7 +88,7 @@ $.fn.insertAt = function(i, selector) {
         object.prepend(this);
         return this;
     }
-    var oldIndex = this.data('index');
+    var oldIndex = this.data('home.html');
 
     this.attr('data-index', i);
     object.find(">*:nth-child(" + i + ")").after(this);
@@ -449,7 +449,7 @@ $(function(){
                 var innerIds = parent.attr(LobiPanel.PRIVATE_OPTIONS.parentAttr);
                 parent.attr(LobiPanel.PRIVATE_OPTIONS.parentAttr, innerIds+" "+innerId);
             }
-            me.$el.attr('data-index', me.$el.index());
+            me.$el.attr('data-index', me.$el.home());
         };
         var _insertInParent = function(){
             //find its parent element

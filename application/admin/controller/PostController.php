@@ -3,7 +3,7 @@
 
 namespace app\admin\controller;
 
-use app\admin\model\Post;
+use app\common\model\Post;
 use think\Controller;
 
 class PostController extends Controller
@@ -23,11 +23,11 @@ class PostController extends Controller
             $post->data($_POST);
             $post->save();
         }
-        $this->success('保存成功', '/post/all');
+        $this->success('保存成功', '/admin/post/all');
     }
 
     public function delete(){
         Post::destroy(input('id'));
-        $this->success("删除成功",'/post/all');
+        $this->success("删除成功",'/admin/post/all');
     }
 }

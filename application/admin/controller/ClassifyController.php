@@ -3,7 +3,7 @@
 
 namespace app\admin\controller;
 
-use app\admin\model\Classify;
+use app\common\model\Classify;
 use think\Controller;
 
 class ClassifyController extends Controller
@@ -28,7 +28,7 @@ class ClassifyController extends Controller
             ]);
             $classify->save();
         }
-        $this->success("保存成功", "/classify/all");
+        $this->success("保存成功", "/admin/classify/all");
     }
 
     /**
@@ -37,6 +37,6 @@ class ClassifyController extends Controller
     public function delete()
     {
         Classify::destroy(['id' => input('id')]);
-        $this->success("删除成功", '/classify/all');
+        $this->success("删除成功", '/admin/classify/all');
     }
 }

@@ -43,8 +43,8 @@
         <div class="nano-content">
             <ul>
                 <!--总览-->
-                <li class="{$nav['index']|default=''}">
-                    <a href="/"><i class="ti-home"></i> 总览 </a>
+                <li class="{$nav['main']|default=''}">
+                    <a href="/admin"><i class="ti-home"></i> 总览 </a>
                 </li>
                 <!--帖子-->
                 <li class="{$nav['post']|default=''}">
@@ -52,10 +52,10 @@
                             class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li>
-                            <a href="/post/all">所有帖子</a>
+                            <a href="/admin/post/all">所有帖子</a>
                         </li>
                         <li>
-                            <a href="/post/create">创建帖子</a>
+                            <a href="/admin/post/create">创建帖子</a>
                         </li>
                     </ul>
                 </li>
@@ -63,8 +63,8 @@
                     <a class="sidebar-sub-toggle"><i class="ti-package"></i> 分类 <span
                             class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
-                        <li><a href="/classify/all">所有分类</a></li>
-                        <li><a href="/classify/create">创建分类</a></li>
+                        <li><a href="/admin/classify/all">所有分类</a></li>
+                        <li><a href="/admin/classify/create">创建分类</a></li>
                     </ul>
                 </li>
             </ul>

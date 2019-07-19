@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\admin\model;
+namespace app\common\model;
 
 use think\Db;
 use think\Model;
@@ -22,6 +22,7 @@ class Classify extends Model
         }
     }
 
+    /*帖子数量属性*/
     public function getPostNumAttr($value,$data){
         return count(Post::get(['classify_id'=>$data['id']]));
     }

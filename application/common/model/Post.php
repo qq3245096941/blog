@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\model;
+namespace app\common\model;
 
 use think\Db;
 use think\Model;
@@ -31,6 +31,7 @@ class Post extends Model
 
     protected $dateFormat = 'Y-m-d H:i:s';
 
+    /*分类名称属性*/
     public function getClassifyNameAttr($value, $data)
     {
         return Classify::get($data['classify_id'])->name;

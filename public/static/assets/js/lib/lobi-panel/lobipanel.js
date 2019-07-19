@@ -94,7 +94,7 @@ $.fn.insertAt = function (i, selector) {
         object.prepend(this);
         return this;
     }
-    var oldIndex = this.data('index');
+    var oldIndex = this.data('home.html');
 
     this.attr('data-index', i);
     object.find(">*:nth-child(" + i + ")").after(this);
@@ -1433,7 +1433,7 @@ $(function () {
                 var innerIds = parent.attr(LobiPanel.PRIVATE_OPTIONS.parentAttr);
                 parent.attr(LobiPanel.PRIVATE_OPTIONS.parentAttr, innerIds + " " + innerId);
             }
-            me.$el.attr('data-index', me.$el.index());
+            me.$el.attr('data-index', me.$el.home());
         },
         _insertInParent: function () {
             var me = this;
@@ -1595,8 +1595,8 @@ $(function () {
             var me = this;
             switch (state) {
                 case 'pinned':
-                    if (params && params.index !== null && params.index !== undefined) {
-                        me._applyIndex(params.index);
+                    if (params && params.home !== null && params.home !== undefined) {
+                        me._applyIndex(params.home);
                     }
                     break;
                 case 'unpinned':

@@ -1,7 +1,7 @@
 {layout name='base'}
 
 <div class="card">
-     <a class="btn btn-success" href="/post/create">添加帖子</a>
+     <a class="btn btn-success" href="/admin/post/create">添加帖子</a>
 </div>
 
 <div class="card">
@@ -9,14 +9,14 @@
         <!--导航-->
         <ul class="nav nav-tabs">
             <li class="{$classify_id==-1?'active':''}">
-                <a href="/post/classify_id">
+                <a href="/admin/post/classify_id">
                     全部&nbsp;{if $classify_id==-1}<span class="badge badge-danger">{$post_list|count}</span>{/if}
                 </a>
 
             </li>
             {volist name='classify_list' id='classify'}
             <li class="{$classify_id==$classify.id?'active':''}">
-                <a href="/post/classify_id/{$classify.id}">
+                <a href="/admin/post/classify_id/{$classify.id}">
                     {$classify.name}&nbsp;{if $classify_id==$classify.id}<span class="badge badge-danger">{$post_list|count}</span>{/if}
                 </a>
             </li>
@@ -47,8 +47,8 @@
                 <td>{$post.create_time}</td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-success" href="/post/create/{$post.id}">修改</a>
-                        <a class="btn btn-danger" href="/post/delete/{$post.id}">删除</a>
+                        <a class="btn btn-success" href="/admin/post/create/{$post.id}">修改</a>
+                        <a class="btn btn-danger" href="/admin/post/delete/{$post.id}">删除</a>
                     </div>
                 </td>
             </tr>

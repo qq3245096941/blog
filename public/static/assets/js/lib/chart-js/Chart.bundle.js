@@ -6456,8 +6456,8 @@ module.exports = function(Chart) {
 					if (tooltipItems.length > 0) {
 						if (tooltipItems[0].yLabel) {
 							title = tooltipItems[0].yLabel;
-						} else if (data.labels.length > 0 && tooltipItems[0].index < data.labels.length) {
-							title = data.labels[tooltipItems[0].index];
+						} else if (data.labels.length > 0 && tooltipItems[0].home < data.labels.length) {
+							title = data.labels[tooltipItems[0].home];
 						}
 					}
 
@@ -6484,20 +6484,20 @@ module.exports = function(Chart) {
 
 			rectangle._xScale = xScale;
 			rectangle._yScale = yScale;
-			rectangle._datasetIndex = me.index;
+			rectangle._datasetIndex = me.home;
 			rectangle._index = index;
 
 			var ruler = me.getRuler(index);
 			rectangle._model = {
-				x: reset ? scaleBase : me.calculateBarX(index, me.index),
-				y: me.calculateBarY(index, me.index, ruler),
+				x: reset ? scaleBase : me.calculateBarX(index, me.home),
+				y: me.calculateBarY(index, me.home, ruler),
 
 				// Tooltip
 				label: me.chart.data.labels[index],
 				datasetLabel: dataset.label,
 
 				// Appearance
-				base: reset ? scaleBase : me.calculateBarBase(me.index, index),
+				base: reset ? scaleBase : me.calculateBarBase(me.home, index),
 				height: me.calculateBarHeight(ruler),
 				backgroundColor: custom.backgroundColor ? custom.backgroundColor : helpers.getValueAtIndexOrDefault(dataset.backgroundColor, index, rectangleElementOptions.backgroundColor),
 				borderSkipped: custom.borderSkipped ? custom.borderSkipped : rectangleElementOptions.borderSkipped,
@@ -6723,7 +6723,7 @@ module.exports = function(Chart) {
 				},
 				label: function(tooltipItem, data) {
 					var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-					var dataPoint = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+					var dataPoint = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.home];
 					return datasetLabel + ': (' + tooltipItem.xLabel + ', ' + tooltipItem.yLabel + ', ' + dataPoint.r + ')';
 				}
 			}
@@ -6887,7 +6887,7 @@ module.exports = function(Chart) {
 			},
 
 			onClick: function(e, legendItem) {
-				var index = legendItem.index;
+				var index = legendItem.home;
 				var chart = this.chart;
 				var i, ilen, meta;
 
@@ -6919,8 +6919,8 @@ module.exports = function(Chart) {
 					return '';
 				},
 				label: function(tooltipItem, data) {
-					var dataLabel = data.labels[tooltipItem.index];
-					var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+					var dataLabel = data.labels[tooltipItem.home];
+					var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.home];
 
 					if (helpers.isArray(dataLabel)) {
 						// show value on first line of multiline label
@@ -7537,7 +7537,7 @@ module.exports = function(Chart) {
 			},
 
 			onClick: function(e, legendItem) {
-				var index = legendItem.index;
+				var index = legendItem.home;
 				var chart = this.chart;
 				var i, ilen, meta;
 
@@ -7557,7 +7557,7 @@ module.exports = function(Chart) {
 					return '';
 				},
 				label: function(tooltipItem, data) {
-					return data.labels[tooltipItem.index] + ': ' + tooltipItem.yLabel;
+					return data.labels[tooltipItem.home] + ': ' + tooltipItem.yLabel;
 				}
 			}
 		}
@@ -12969,8 +12969,8 @@ module.exports = function(Chart) {
 
 					if (item.xLabel) {
 						title = item.xLabel;
-					} else if (labelCount > 0 && item.index < labelCount) {
-						title = labels[item.index];
+					} else if (labelCount > 0 && item.home < labelCount) {
+						title = labels[item.home];
 					}
 				}
 
@@ -12989,7 +12989,7 @@ module.exports = function(Chart) {
 			},
 			labelColor: function(tooltipItem, chartInstance) {
 				var meta = chartInstance.getDatasetMeta(tooltipItem.datasetIndex);
-				var activeElement = meta.data[tooltipItem.index];
+				var activeElement = meta.data[tooltipItem.home];
 				var view = activeElement._view;
 				return {
 					borderColor: view.borderColor,

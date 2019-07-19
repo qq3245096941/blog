@@ -12,5 +12,7 @@
     <orderEntry type="library" name="showdown" level="application" />
     <orderEntry type="library" name="echarts-en" level="application" />
     <orderEntry type="library" name="highlight" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

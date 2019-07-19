@@ -1,9 +1,8 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\model\Classify;
-use app\admin\model\Post;
-use http\Client\Curl\User;
+use app\common\model\Classify;
+use app\common\model\Post;
 use think\Controller;
 use think\Db;
 /**
@@ -14,11 +13,10 @@ class UrlController extends Controller
     /**
      * 跳转到总览
      */
-    public function index()
+    public function main()
     {
-        $this->assign('post_list',Post::all());
-        $this->assign("classify_list",Classify::all());
-        return $this->create_url('总览', 'index', "index/index");
+        $this->assign("post_list",Post::all())->assign("classify_list",Classify::all());
+        return $this->create_url('总览', 'main', 'main/index');
     }
 
     /**
@@ -27,7 +25,7 @@ class UrlController extends Controller
     public function post_all()
     {
         $post = new Post();
-        $post_list = $post->order("create_time")->select();
+        $post_list = $post->order("create_time",'desc')->select();
         //classify_id表示点击“全部”标签
         $this->assign('post_list', $post_list)->assign("classify_list",Classify::all())->assign('classify_id',-1);
         return $this->create_url('所有帖子', 'post', 'post/all');
