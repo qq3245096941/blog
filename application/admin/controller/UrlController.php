@@ -5,11 +5,34 @@ use app\common\model\Classify;
 use app\common\model\Post;
 use think\Controller;
 use think\Db;
+use think\Request;
+use think\Session;
+
 /**
  * 路径跳转专用控制器，传入两个参数，$title，$nav
  */
 class UrlController extends Controller
 {
+    private $user = ['email'=>"3245096941@qq.com",'password'=>'miao1995'];
+
+    /**
+     * 登录
+     */
+    public function login(){
+        $request = Request::instance();
+
+        /*判断请求是否是post请求，如果是则说明是信息提交*/
+        if($request->method('true')=='POST'){
+            if(input('email')==$this->user['email']&&input('password')==$this->user['password']){
+                /*将用户信息保存在session中*/
+                Session::set("user",$this->user);
+                $this->success("登录成功",'/admin');
+            }
+        }
+
+        return $this->fetch('common@public/login');
+    }
+
     /**
      * 跳转到总览
      */

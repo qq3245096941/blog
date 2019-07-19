@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>追风的牧羊人个人博客</title>
-    <!-- ================= Favicon ================== -->
-    <!-- Styles -->
-    <link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="/static/assets/css/lib/sidebar.css" rel="stylesheet">
-    <link href="/static/assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/assets/css/lib/nixon.css" rel="stylesheet">
-    <link href="/static/assets/lib/lobipanel/css/lobipanel.min.css" rel="stylesheet">
-    <link href="/static/assets/css/style.css" rel="stylesheet">
-
-    <!-- /# content wrap -->
-    <script src="/static/assets/js/lib/jquery.min.js"></script>
-    <script src="/static/assets/js/lib/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
-    <!--文件上传-->
-    <link rel="stylesheet" href="/static/bootstrap/fileinput.min.css">
-    <script src="/static/bootstrap/fileinput.min.js"></script>
-    <script src="/static/bootstrap/fileinput_locale_zh.js"></script>
-
-    <!--编辑器-->
-    <script src="https://cdn.bootcss.com/showdown/1.9.0/showdown.min.js"></script>
-
-    <!--图表-->
-    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.min.js"></script>
-
-    <!--代码高亮-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/github.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-</head>
-
-<body>
+{include file='common@public/header'}
 <!--侧边导航栏-->
 <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
     <div class="nano">
@@ -85,6 +47,16 @@
         </div>
     </div>
     <div class="pull-right p-r-15">
+        <ul>
+            <li class="header-icon dib">
+                {if $Request.session.user.email}
+                    <span>管理员</span>
+                {else}
+                    <a href="/login" style="color: #fff;">登录</a>
+                {/if}
+            </li>
+        </ul>
+
     </div>
 </div>
 <div class="chat-sidebar">
@@ -122,27 +94,4 @@
         </div>
     </div>
 </div>
-</body>
-
-<!-- jquery vendor -->
-<script src="/static/assets/js/lib/jquery.nanoscroller.min.js"></script>
-<!-- nano scroller -->
-<script src="/static/assets/js/lib/sidebar.js"></script>
-
-<script src="/static/assets/lib/lobipanel/js/lobipanel.js"></script>
-
-<!-- // Datamap -->
-<script src="/static/assets/js/scripts.js"></script>
-<!-- scripit init-->
-<script>
-    $(document).ready(function () {
-        $('#lobipanel-custom-control').lobiPanel({
-            reload: false,
-            close: false,
-            editTitle: false
-        });
-    });
-</script>
-</body>
-
-</html>
+{include file='common@public/footer'}

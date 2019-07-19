@@ -1,0 +1,14 @@
+{
+  "url": [
+    {
+      "port": "/admin",
+      "method": "get",
+      "explain": "跳转到后台总览页面"
+    },
+    {
+      "port":"/admin/classify/all",
+      "method": "get",
+      "explain": "跳转到所有分类页面"
+    }
+  ]
+}

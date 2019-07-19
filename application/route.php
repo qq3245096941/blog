@@ -15,6 +15,10 @@ Route::pattern([
     'id'=> '\d+',
 ]);
 
+/*登录*/
+Route::rule('login','admin/url/login');
+
+/*分类*/
 Route::group('admin/classify', [
     /*页面*/
     'all' => 'admin/url/classify_all',
@@ -24,6 +28,8 @@ Route::group('admin/classify', [
     /*保存*/
     'save' => ['admin/classify/save', ['method' => 'post']]
 ]);
+
+/*帖子*/
 Route::group('admin/post',[
    /*页面*/
    'all'=>'admin/url/post_all',
@@ -35,8 +41,14 @@ Route::group('admin/post',[
     'classify_id/[:id]'=>['admin/url/post_by_classify']
 ]);
 
+/*接口*/
+Route::group('admin/url',[
+    'create/[:id]'=>'admin/url/url_create',
+]);
+
+/*后台首页*/
 Route::get("admin",'admin/url/main');
 
-/*前台模块*/
+/*前台首页*/
 Route::get("/",'index/index/home');
 
