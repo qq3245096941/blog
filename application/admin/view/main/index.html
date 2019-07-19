@@ -74,7 +74,7 @@
                     $(".url").append(`
                         <tr>
                             <td>${item.port}</td>
-                            <td><span class="label ${item.method==='get'?'label-success':'label-danger'}">${item.method}</span></td>
+                            <td><span class="badge ${item.method==='get'?'badge-success':'badge-danger'}">${item.method.toUpperCase()}</span></td>
                             <td>${item.explain}</td>
                         </tr>
                     `)
