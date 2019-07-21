@@ -2,40 +2,40 @@
 
 <div class="row">
     <div class="col-lg-3">
-        <div class="card">
+        <a class="card statistics" href="/admin/post/all">
             <div class="stat-widget-one">
                 <div class="stat-icon dib"><i class="ti-comment-alt color-success border-success"></i></div>
                 <div class="stat-content dib">
-                    <div class="stat-text">帖子数</div>
+                    <div class="stat-text">帖子</div>
                     <div class="stat-digit">{$post_list|count}</div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-lg-3">
-        <div class="card">
+        <a class="card statistics">
             <div class="stat-widget-one">
                 <div class="stat-icon dib"><i class="ti-user color-primary border-primary"></i></div>
                 <div class="stat-content dib">
-                    <div class="stat-text">New Customer</div>
+                    <div class="stat-text">用户</div>
                     <div class="stat-digit">961</div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-lg-3">
-        <div class="card">
+        <a class="card statistics" href="/admin/classify/all">
             <div class="stat-widget-one">
                 <div class="stat-icon dib"><i class="ti-layout-grid2 color-pink border-pink"></i></div>
                 <div class="stat-content dib">
-                    <div class="stat-text">Active Projects</div>
-                    <div class="stat-digit">770</div>
+                    <div class="stat-text">分类</div>
+                    <div class="stat-digit">{$classify_list|count}</div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-lg-3">
-        <div class="card">
+        <a class="card statistics">
             <div class="stat-widget-one">
                 <div class="stat-icon dib"><i class="ti-link color-danger border-danger"></i></div>
                 <div class="stat-content dib">
@@ -43,47 +43,102 @@
                     <div class="stat-digit">2,781</div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
+</div>
+
+<style>
+    .statistics {
+        display: block;
+    }
+
+    .statistics:hover {
+        box-shadow: 3px 8px 10px #eee;
+    }
+</style>
+
+<div class="card row port">
+
+
+    <script>
+        setTable('post');
+        setTable('classify');
+        setTable('sundry');
+
+        function setTable(table_name) {
+            /*创建一个div，用于存放表格*/
+            $(".port").append(`<div class="${table_name} col-md-6"></div>`);
+            new Promise(resolve => {
+                $.get("/static/tsconfig.json", function (res) {
+                    switch (table_name) {
+                        case "post":
+                            resolve(res.post);
+                            break;
+                        case "classify":
+                            resolve(res.classify);
+                            break;
+                        case "sundry":
+                            resolve(res.sundry);
+                            break;
+                    }
+                })
+            }).then((object) => {
+                $(`.${table_name}`).append(`<h4>${object.title}</h4>`).append(`
+                    <table class="table table-responsive table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>路径</th>
+                            <th>请求方式</th>
+                            <th>post请求参数</th>
+                            <th>详细说明</th>
+                        </tr>
+                        </thead>
+                        <tbody class="url${table_name}">
+
+                        </tbody>
+                    </table>
+                `);
+                object.url.forEach(item => {
+                    $(`.url${table_name}`).append(`
+                         <tr>
+                             <td>${item.port}</td>
+                             <td><span class="badge ${item.method === 'get' ? 'badge-success' : 'badge-danger'}">${item.method.toUpperCase()}</span></td>
+                             <td>${item.post === undefined ? '#' : stringJson(item.post)}
+                             </td>
+                             <td width="200" style="line-height: 20px;text-align: left">${item.explain}</td>
+                         </tr>`)
+                });
+
+                $(".port pre code").each((index,element)=>{
+                    hljs.highlightBlock(element);
+                });
+            });
+
+
+        }
+
+        /**
+         * 将json对象转换成带格式的字符串
+         * @param json
+         * @returns {string}
+         */
+        function stringJson(json) {
+            let start = '<pre><code>{';
+            let string = '';
+            for (let key in json) {
+                string = string + `\n   ${key}:${json[key]},`;
+            }
+            let end = '\n}</code></pre>';
+            return start + string + end;
+        }
+    </script>
 </div>
 
 <div class="card row">
     <div id="post" class="col-md-6" style="height:500px;"></div>
-    <div class="col-md-6">
-        <h4>接口列表</h4>
-        <table class="table table-responsive">
-            <thead>
-            <tr>
-                <th>路径</th>
-                <th>请求方式</th>
-                <th>详细说明</th>
-            </tr>
-            </thead>
-            <tbody class="url">
 
-            </tbody>
-        </table>
-
-        <script>
-            new Promise(resolve => {
-                $.get("/static/tsconfig.json",function (res) {
-                    resolve(res.url);
-                })
-            }).then(data=>{
-                data.forEach(item=>{
-                    $(".url").append(`
-                        <tr>
-                            <td>${item.port}</td>
-                            <td><span class="badge ${item.method==='get'?'badge-success':'badge-danger'}">${item.method.toUpperCase()}</span></td>
-                            <td>${item.explain}</td>
-                        </tr>
-                    `)
-                })
-            })
-
-        </script>
-    </div>
 </div>
+
 
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
@@ -107,24 +162,24 @@
             show: false,
             min: 80,
             max: 600,
-            inRange: {
-
-            }
+            inRange: {}
         },
     });
 
     myChart.setOption({
-        series : [
+        series: [
             {
-                name:'帖子',
-                type:'pie',
-                radius : '55%',
+                name: '帖子',
+                type: 'pie',
+                radius: '55%',
                 center: ['50%', '50%'],
-                data:[
+                data: [
                     /*{volist name='classify_list' id='classify'}*/
-                        {value:'{$classify.post_num}',name:'{$classify.name}'},
+                    {value: '{$classify.post_num}', name: '{$classify.name}'},
                     /*{/volist}*/
-                ].sort(function (a, b) { return a.value - b.value; }),
+                ].sort(function (a, b) {
+                    return a.value - b.value;
+                }),
                 roseType: 'radius',
                 label: {
                     normal: {

@@ -72,9 +72,7 @@
         $(".body").on("input propertychange", function () {
             let html = converter.makeHtml($(this).val());
             $(".html").html(html);
-
             $(".html pre code").each((index,element)=>{
-                $(element).css("background",'#f5f5f5');
                 hljs.highlightBlock(element);
             });
         });

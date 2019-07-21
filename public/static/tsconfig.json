@@ -1,14 +1,96 @@
 {
-  "url": [
-    {
-      "port": "/admin",
-      "method": "get",
-      "explain": "跳转到后台总览页面"
-    },
-    {
-      "port":"/admin/classify/all",
-      "method": "get",
-      "explain": "跳转到所有分类页面"
-    }
-  ]
+  "post": {
+    "title": "帖子",
+    "url": [
+      {
+        "port": "/admin",
+        "method": "get",
+        "explain": "跳转到后台总览页面"
+      },
+      {
+        "port": "/admin/post/all",
+        "method": "get",
+        "explain": "跳转到所有分类页面"
+      },
+      {
+        "port": "/admin/post/classify_id/:id",
+        "method": "get",
+        "explain": "获取指定id分类的帖子"
+      },
+      {
+        "port": "/admin/post/create/[:id]",
+        "method": "get",
+        "explain": "跳转到创建分类页面，id选填，如果id不为空则修改当前id对应的帖子"
+      },
+      {
+        "port": "/admin/post/save",
+        "method": "post",
+        "post": {
+          "title": "标题",
+          "intro": "简介",
+          "classify_id": "分类id",
+          "body": "详情，md语法"
+        },
+        "explain": "保存帖子"
+      },
+      {
+        "port": "/admin/post/delete/:id",
+        "method": "get",
+        "explain": "删除帖子,id必填，删除当前id的帖子"
+      }
+    ]
+  },
+  "classify": {
+    "title": "分类",
+    "url": [
+      {
+        "port": "/admin/classify/all",
+        "method": "get",
+        "explain": "跳转到所有分类页面"
+      },
+      {
+        "port": "/admin/classify/create/[:id]",
+        "method": "get",
+        "explain": "跳转到创建分类页面，id为可选，如果id不为空则修改当前id对应的类"
+      },
+      {
+        "port": "/admin/classify/save",
+        "method": "post",
+        "post": {
+          "name": "分类名称",
+          "sort": "排序数字"
+        },
+        "explain": "保存分类"
+      },
+      {
+        "port": "/admin/classify/delete/:id",
+        "method": "get",
+        "explain": "删除分类,id必填，删除当前id的分类"
+      }
+    ]
+  },
+  "sundry": {
+    "title": "杂项",
+    "url": [
+      {
+        "port": "/admin/login",
+        "method": "get丨post",
+        "post": {
+          "email": "邮箱",
+          "password": "密码"
+        },
+        "explain": "管理员登录页面，敏感操作需要管理员权限。或者进行登录验证，验证账号和密码是否正确，请求方式为post"
+      },
+      {
+        "port": "/",
+        "method": "get",
+        "explain": "前台首页"
+      },
+      {
+        "port": "/admin",
+        "method": "get",
+        "explain": "后台首页"
+      }
+    ]
+  }
 }
