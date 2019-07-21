@@ -38,7 +38,6 @@ class UrlController extends Controller
      */
     public function main()
     {
-
         $this->assign("post_list",Post::all())->assign("classify_list",Classify::all());
         return $this->create_url('总览', 'main', 'main/index');
     }
@@ -81,8 +80,9 @@ class UrlController extends Controller
     {
         $classify_list = Classify::all();
         $this->assign("classify_list", $classify_list);
-        $this->assign("currentClassify",$classify_list[0]);
-
+        if($classify_list!=null){
+            $this->assign("currentClassify",$classify_list[0]);
+        }
         if (input('id')) {
             $post = Post::get(input('id'));
             $currentClassify = Classify::get(['id'=>$post->classify_id]);

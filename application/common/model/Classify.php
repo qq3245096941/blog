@@ -13,7 +13,7 @@ class Classify extends Model
     protected function initialize()
     {
         if (!Db::query("show tables like '" . config('database')['prefix'] . 'classify' . "'")) {
-            Db::execute("CREATE TABLE `".config('database')['prefix']."classify` (
+            Db::execute("CREATE TABLE `" . config('database')['prefix'] . "classify` (
                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
                   `name` varchar(100) NOT NULL DEFAULT '',
                   `sort` tinyint(4) NOT NULL DEFAULT '0',
@@ -23,7 +23,8 @@ class Classify extends Model
     }
 
     /*帖子数量属性*/
-    public function getPostNumAttr($value,$data){
-        return count(Post::get(['classify_id'=>$data['id']]));
+    public function getPostNumAttr($value, $data)
+    {
+        return count(Post::all(['classify_id' => $data['id']]));
     }
 }

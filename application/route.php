@@ -50,5 +50,8 @@ Route::group('admin/url',[
 Route::get("admin",'admin/url/main');
 
 /*前台首页*/
-Route::get("/",'index/index/home');
+Route::get("/[:page]",'index/index/home');
+
+/*关于作者*/
+Route::get("author",'index/index/author');
 

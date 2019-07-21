@@ -11,7 +11,7 @@ class BaseController extends Controller
     protected function _initialize()
     {
         if(Session::get("user")==null){
-            $this->error("您未登录，请登录",'/login');
+            $this->redirect('/admin');
         }
     }
 }
