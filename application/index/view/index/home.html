@@ -13,21 +13,14 @@
     <hr>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
+            <li class="page-item {$current_page==1?'disabled':''}">
+                <a class="page-link" href="/{$current_page-1}"><span>&laquo;</span></a>
             </li>
             {for start="1" end="$count+1" name='num'}
                 <li class="page-item {$current_page==$num?'active':''}"><a class="page-link" href="/{$num}">{$num}</a></li>
             {/for}
-
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
+            <li class="page-item {$current_page==$count?'disabled':''}">
+                <a class="page-link" href="/{$current_page+1}"><span>&raquo;</span></a>
             </li>
         </ul>
     </nav>
