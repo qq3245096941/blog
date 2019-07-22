@@ -25,7 +25,7 @@ class PostController extends BaseController
             $post->data($_POST);
             $post->save();
         }
-        $this->success('保存成功', '/admin/post/all');
+        $this->success("保存成功","/admin/post/all");
     }
 
     /*删除帖子*/

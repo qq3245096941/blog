@@ -3,9 +3,10 @@
     {volist name='post_list' id='post'}
     <div class="card" style="margin-bottom: 5px;position: relative">
         <div class="card-body">
-            <h5 class="card-title">{$post.title} <span class="badge badge-success">{$post.classify_name}</span></h5>
+            <h3 class="card-title title">{$post.title} <span class="badge badge-success">{$post.classify_name}</span></h3>
+
             <p class="card-text">{$post.intro}</p>
-            <a href="#" class="btn btn-primary">查看详情</a>
+            <a href="/particulars/{$post.id}" class="btn btn-primary">查看详情</a>
             <span style="position: absolute;right: 20px;top: 20px;" class="pull-right">{$post.create_time}</span>
         </div>
     </div>
@@ -14,14 +15,26 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item {$current_page==1?'disabled':''}">
-                <a class="page-link" href="/{$current_page-1}"><span>&laquo;</span></a>
+                <a class="page-link" href="/page/{$current_page-1}"><span>&laquo;</span></a>
             </li>
             {for start="1" end="$count+1" name='num'}
-                <li class="page-item {$current_page==$num?'active':''}"><a class="page-link" href="/{$num}">{$num}</a></li>
+                <li class="page-item {$current_page==$num?'active':''}"><a class="page-link" href="/page/{$num}">{$num}</a></li>
             {/for}
             <li class="page-item {$current_page==$count?'disabled':''}">
-                <a class="page-link" href="/{$current_page+1}"><span>&raquo;</span></a>
+                <a class="page-link" href="/page/{$current_page+1}"><span>&raquo;</span></a>
             </li>
         </ul>
     </nav>
 </div>
+
+
+<style>
+    .title{
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .title :hover{
+        color: #eee;
+    }
+</style>

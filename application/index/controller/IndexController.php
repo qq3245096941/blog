@@ -28,7 +28,17 @@ class IndexController extends Controller
         return $this->fetch('home');
     }
 
+    /**
+     * 关于作者
+     */
     public function author(){
         return $this->fetch('author');
+    }
+
+    /**
+     * 帖子详情
+     */
+    public function post_particulars(){
+        return $this->assign('post',Post::get(input('id')))->fetch('particulars');
     }
 }

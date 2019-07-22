@@ -29,7 +29,6 @@ class UrlController extends Controller
                 $this->success("登录成功",'/admin');
             }
         }
-
         return $this->fetch('common@public/login');
     }
 

@@ -1,13 +1,4 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
 
 use think\Route;
 
@@ -49,8 +40,13 @@ Route::group('admin/url',[
 /*后台首页*/
 Route::get("admin",'admin/url/main');
 
+Route::get("/","index/index/home");
+
 /*前台首页*/
-Route::get("/[:page]",'index/index/home');
+Route::get("page/[:page]",'index/index/home');
+
+/*帖子详情*/
+Route::get("particulars/:id","index/index/post_particulars");
 
 /*关于作者*/
 Route::get("author",'index/index/author');

@@ -2,9 +2,8 @@
 
 <div class="card alert">
     <div class="card-body">
-        <form class="form-horizontal" method="post" action="/admin/post/save" autocomplete='off'>
+        <form class="form-horizontal" autocomplete='off' method="post" action="/admin/post/save">
             <input type="text" hidden name="id" value="{$post['id']|default=''}">
-
             <div class="form-group">
                 <label class="col-sm-1 control-label">标题</label>
                 <div class="col-sm-11">
@@ -38,44 +37,74 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">内容</label>
-                        <div class="col-sm-10">
-                            <textarea style="height: 400px;" name="body" class="form-control body"
-                                      placeholder="markdown语法">{$post.body|default=''}</textarea>
-                            <hr>
-                            <div class="btn-group btn-group-xs">
-                                <button class="btn btn-success update_img" type="button">上传图片</button>
-                                <button class="btn btn-default" type="button">上传截图</button>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">内容</label>
+                    <div class="col-sm-11">
+                        <div class="col-sm-6" title="图片上传">
+                            <div style="margin-bottom: 5px">
+                                <span class="icon"><i class="ti-export"></i></span>
                             </div>
+                            <textarea class="col-md-12" name="body" placeholder="markdown语法">{$post['body']|default=''}</textarea>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-sm-6" style="height: 400px;overflow: auto">
-                    <div class="html">
+                        <!--解析markdown标签生成的html-->
+                        <div class="html col-sm-6"></div>
 
+                        <script>
+                            $(function () {
+
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
-
-            <button class="btn btn-success" type="submit">保存</button>
+            <button class="btn btn-success save" type="submit">保存</button>
         </form>
     </div>
 </div>
 
+<style>
+    textarea{
+        height: 500px;
+        overflow: auto;
+        padding: 10px;
+        font-family: Consolas,serif;
+    }
+
+    .html{
+        height: 500px;
+        overflow: auto;
+        padding-bottom: 50px;
+    }
+
+    .icon{
+        padding: 5px;
+        display: inline;
+        width: 50px;
+    }
+
+    .icon:hover{
+        border: 1px solid #eee;
+    }
+</style>
+
 <script>
     $(function () {
-        /*内容*/
         let converter = new showdown.Converter();
-        $(".body").on("input propertychange", function () {
-            let html = converter.makeHtml($(this).val());
-            $(".html").html(html);
+
+        refresh();
+        $("textarea").on('input',function () {
+            refresh();
+        });
+
+        /*代码刷新*/
+        function refresh() {
+            $(".html").html(converter.makeHtml($("textarea").val()));
             $(".html pre code").each((index,element)=>{
                 hljs.highlightBlock(element);
             });
-        });
+            $(".html").scrollTop($(".html")[0].scrollHeight);
+        }
 
         $('form').bootstrapValidator({
             feedbackIcons: {
