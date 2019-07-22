@@ -32,17 +32,19 @@ Route::group('admin/post',[
     'classify_id/[:id]'=>['admin/url/post_by_classify']
 ]);
 
-/*接口*/
-Route::group('admin/url',[
-    'create/[:id]'=>'admin/url/url_create',
+/*文件上传*/
+Route::group("upload",[
+    /*图片*/
+    'img'=>'admin/upload/img'
 ]);
+
 
 /*后台首页*/
 Route::get("admin",'admin/url/main');
 
+/*前台首页*/
 Route::get("/","index/index/home");
 
-/*前台首页*/
 Route::get("page/[:page]",'index/index/home');
 
 /*帖子详情*/

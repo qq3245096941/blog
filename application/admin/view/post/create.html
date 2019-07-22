@@ -21,6 +21,19 @@
             </div>
 
             <div class="form-group">
+                <label class="col-sm-1 control-label">封面图</label>
+                <div class="col-sm-11">
+                    <div class="input-group ">
+                        <input type="text" class="form-control" name="placeholder" value="{$post.placeholder|default=''}">
+                        <span class="input-group-btn">
+                            <button id="upload_img" class="btn btn-success" type="button">文件上传</button>
+                        </span>
+                    </div>
+                    <img class="cover" width="200" src="{$post.placeholder|default=''}" alt="">
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-sm-1 control-label">选择分类</label>
                 <div class="col-sm-11">
                     <select class="form-control" name="classify_id">
@@ -42,19 +55,13 @@
                     <div class="col-sm-11">
                         <div class="col-sm-6" title="图片上传">
                             <div style="margin-bottom: 5px">
-                                <span class="icon"><i class="ti-export"></i></span>
+                                <span class="body_img_upload"><i class="ti-export"></i></span>
                             </div>
-                            <textarea class="col-md-12" name="body" placeholder="markdown语法">{$post['body']|default=''}</textarea>
+                            <textarea class="col-md-12" name="body"
+                                      placeholder="markdown语法">{$post['body']|default=''}</textarea>
                         </div>
-
                         <!--解析markdown标签生成的html-->
                         <div class="html col-sm-6"></div>
-
-                        <script>
-                            $(function () {
-
-                            });
-                        </script>
                     </div>
                 </div>
             </div>
@@ -64,46 +71,67 @@
 </div>
 
 <style>
-    textarea{
+    textarea {
         height: 500px;
         overflow: auto;
         padding: 10px;
-        font-family: Consolas,serif;
+        font-size: 12px;
+        font-family: Consolas, serif;
     }
 
-    .html{
+    .html {
         height: 500px;
         overflow: auto;
         padding-bottom: 50px;
     }
 
-    .icon{
+    .icon {
         padding: 5px;
         display: inline;
         width: 50px;
     }
 
-    .icon:hover{
+    .icon:hover {
         border: 1px solid #eee;
     }
 </style>
 
-<script>
-    $(function () {
-        let converter = new showdown.Converter();
+<script type="module">
+    import obj from "/static/plugin.js";
 
+    $(function () {
+        /*首先解析markdown语法*/
+        let converter = new showdown.Converter();
         refresh();
-        $("textarea").on('input',function () {
+        $("textarea").on('input', function () {
             refresh();
+        });
+
+        /*封面图上传*/
+        obj.upload_img("#upload_img").then(data=>{
+            $("input[name='placeholder']").val(data.data.img_url);
+            $(".cover").attr("src",data.data.img_url);
+        });
+
+        /*body图片上传*/
+        obj.upload_img(".body_img_upload").then(data=>{
+            $("textarea").val($("textarea").val()+`\n![图片]({$Request.domain}${data.data.img_url})`);
+            refresh()
         });
 
         /*代码刷新*/
         function refresh() {
             $(".html").html(converter.makeHtml($("textarea").val()));
-            $(".html pre code").each((index,element)=>{
+            $(".html pre code").each((index, element) => {
                 hljs.highlightBlock(element);
             });
             $(".html").scrollTop($(".html")[0].scrollHeight);
+
+            /*修改图片样式*/
+            $(".html img").css({
+                "display":"block",
+                "width":"100%"
+            })
         }
 
         $('form').bootstrapValidator({
@@ -135,6 +163,13 @@
                         },
                     }
                 },
+                placeholder:{
+                    validators: {
+                        notEmpty: {
+                            message: '请上传一张封面图'
+                        },
+                    }
+                },
                 classify_id: {
                     validators: {
                         notEmpty: {
@@ -144,5 +179,7 @@
                 }
             }
         });
+
+
     });
 </script>

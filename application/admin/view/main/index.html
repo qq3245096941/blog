@@ -211,9 +211,9 @@
                          <tr>
                              <td>${item.port}</td>
                              <td><span class="badge ${item.method === 'get' ? 'badge-success' : 'badge-danger'}">${item.method.toUpperCase()}</span></td>
-                             <td>${item.post === undefined ? '#' : stringJson(item.post)}
+                             <td width="150">${item.post === undefined ? '#' : stringJson(item.post)}
                              </td>
-                             <td width="200" style="line-height: 20px;text-align: left">${item.explain}</td>
+                             <td style="line-height: 20px;text-align: left;font-size: 12px">${item.explain}</td>
                          </tr>`)
                 });
 
