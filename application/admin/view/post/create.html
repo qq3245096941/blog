@@ -94,6 +94,8 @@
     .icon:hover {
         border: 1px solid #eee;
     }
+
+
 </style>
 
 <script type="module">
@@ -108,14 +110,14 @@
         });
 
         /*封面图上传*/
-        obj.upload_img("#upload_img").then(data=>{
-            $("input[name='placeholder']").val(data.data.img_url);
-            $(".cover").attr("src",data.data.img_url);
+        obj.upload_img("#upload_img").then(img_url=>{
+            $("input[name='placeholder']").val(img_url);
+            $(".cover").attr("src",img_url);
         });
 
         /*body图片上传*/
-        obj.upload_img(".body_img_upload").then(data=>{
-            $("textarea").val($("textarea").val()+`\n![图片]({$Request.domain}${data.data.img_url})`);
+        obj.upload_img(".body_img_upload").then(img_url=>{
+            $("textarea").val($("textarea").val()+`\n![图片](${img_url})`);
             refresh()
         });
 

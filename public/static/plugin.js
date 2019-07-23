@@ -11,11 +11,13 @@ function upload_img(element) {
                 url: '/upload/img',
                 /*只显示图片文件*/
                 acceptMime: 'image/*',
-                data: {
-                    name: "img"
-                },
                 done: function (res) {
-                    resolve(res);
+                    console.log(res);
+                    if(res.status===10001){
+                        layui.layer.msg(res.message);
+                        document.location = '/admin';
+                    }
+                    resolve(res.img_url);
                 },
                 error: function (res) {
                     console.log(res);

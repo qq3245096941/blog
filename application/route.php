@@ -6,6 +6,9 @@ Route::pattern([
     'id'=> '\d+',
 ]);
 
+/*后台首页*/
+Route::get("admin",'admin/url/main');
+
 /*登录*/
 Route::rule('login','admin/url/login');
 
@@ -37,10 +40,6 @@ Route::group("upload",[
     /*图片*/
     'img'=>'admin/upload/img'
 ]);
-
-
-/*后台首页*/
-Route::get("admin",'admin/url/main');
 
 /*前台首页*/
 Route::get("/","index/index/home");
