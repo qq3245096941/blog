@@ -1,40 +1,59 @@
 {layout name='base'}
 <div class="container" style="margin-top: 10px">
-    {volist name='post_list' id='post'}
-    <div class="card" style="margin-bottom: 5px;position: relative">
-        <div class="card-body">
-            <h3 class="card-title title">{$post.title} <span class="badge badge-success">{$post.classify_name}</span></h3>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                {volist name='post_list' id='post'}
+                <div class="col-md-4" style="margin-top: 3px">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{$post.placeholder}">
+                        <div class="card-body">
+                            <h5 class="card-title">{$post.title}</h5>
+                            <p><small>{$post.create_time}</small></p>
+                            <p class="card-text">{$post.intro}</p>
+                            <a href="/particulars/{$post.id}" class="btn btn-primary">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+            <hr>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item {$current_page==1?'disabled':''}">
+                        <a class="page-link" href="/page/{$current_page-1}"><span>&laquo;</span></a>
+                    </li>
+                    {for start="1" end="$count+1" name='num'}
+                    <li class="page-item {$current_page==$num?'active':''}"><a class="page-link"
+                                                                               href="/page/{$num}">{$num}</a></li>
+                    {/for}
+                    <li class="page-item {$current_page==$count?'disabled':''}">
+                        <a class="page-link" href="/page/{$current_page+1}"><span>&raquo;</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-            <p class="card-text">{$post.intro}</p>
-            <a href="/particulars/{$post.id}" class="btn btn-primary">查看详情</a>
-            <span style="position: absolute;right: 20px;top: 20px;" class="pull-right">{$post.create_time}</span>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    {volist name='classify_list' id='classify'}
+                    <span class="badge badge-primary" style="display: block;margin-top: 2px;font-size: 20px">{$classify.name}</span>
+                    {/volist}
+                </div>
+            </div>
         </div>
     </div>
-    {/volist}
-    <hr>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item {$current_page==1?'disabled':''}">
-                <a class="page-link" href="/page/{$current_page-1}"><span>&laquo;</span></a>
-            </li>
-            {for start="1" end="$count+1" name='num'}
-                <li class="page-item {$current_page==$num?'active':''}"><a class="page-link" href="/page/{$num}">{$num}</a></li>
-            {/for}
-            <li class="page-item {$current_page==$count?'disabled':''}">
-                <a class="page-link" href="/page/{$current_page+1}"><span>&raquo;</span></a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 
 <style>
-    .title{
+    .title {
         cursor: pointer;
         position: relative;
     }
-    
-    .title :hover{
+
+    .title :hover {
         color: #eee;
     }
 </style>

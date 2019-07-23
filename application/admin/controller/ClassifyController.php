@@ -17,19 +17,12 @@ class ClassifyController extends BaseController
     public function save()
     {
         $classify = new Classify();
+        $classify = $classify->allowField(true);
 
         if (input('id')) {
-            $classify->save(
-                [
-                    'name' => input('name'),
-                    'sort' => input('sort')
-                ], ['id' => input('id')]
-            );
+           $classify->save($_POST,input('id'));
         } else {
-            $classify->data([
-                'name' => input('name'),
-                'sort' => input('sort')
-            ]);
+            $classify->data($_POST);
             $classify->save();
         }
         $this->success("保存成功", "/admin/classify/all");

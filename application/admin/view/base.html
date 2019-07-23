@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>追风的牧羊人个人博客</title>
+    <title>控制台</title>
     <!-- ================= Favicon ================== -->
     <!-- Styles -->
     <link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
@@ -52,6 +52,10 @@
                         <li><a href="/admin/classify/create">创建分类</a></li>
                     </ul>
                 </li>
+                <!--图片管理-->
+                <li class="{$nav['main']|default=''}">
+                    <a href="/admin"><i class="ti-image"></i> 图片管理 </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -60,10 +64,7 @@
 <div class="header">
     <div class="pull-left">
         <div class="logo">
-            <a href="index.html">
-                <img id="logoImg" src="logo/logo.png" data-logo_big="logo/logo.png" data-logo_small="logo/logoSmall.png"
-                     alt="Nixon"/>
-            </a>
+            <p><a style="color: #fff" href="/admin">控制台</a></p>
         </div>
         <div class="hamburger sidebar-toggle">
             <span class="ti-menu"></span>

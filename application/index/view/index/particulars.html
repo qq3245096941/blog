@@ -1,9 +1,17 @@
 {layout name='base'}
 <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="/">主页</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{$post.title}</li>
+        </ol>
+    </nav>
+
     <div class="blog-header">
-        <h1 class="blog-title">{$post.title}</h1>
+        <h1 class="blog-title">{$post.title} <span class="badge badge-primary">{$post.classify_name}</span></h1>
         <p class="lead blog-description">{$post.intro}</p>
     </div>
+    <hr>
     <div class="row">
         <div class="col-sm-8 blog-main">
             <div class="blog-post">
@@ -29,10 +37,11 @@
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module sidebar-module-inset">
-                <h4>About</h4>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
-                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                <h4>关于{$post.classify_name}</h4>
+                <span>{$classify.introduce}</span>
+                <p><a target="_blank" href="{$classify.url|default=''}">{$classify.name|default=''}</a></p>
             </div>
+            <hr>
             <div class="sidebar-module">
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
