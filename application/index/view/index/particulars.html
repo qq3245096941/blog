@@ -3,21 +3,20 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page"><a href="/">主页</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{$post.title}</li>
+            <li class="breadcrumb-item active" aria-current="page">{$current_post.title}</li>
         </ol>
     </nav>
 
     <div class="blog-header">
-        <h1 class="blog-title">{$post.title} <span class="badge badge-primary">{$post.classify_name}</span></h1>
-        <p class="lead blog-description">{$post.intro}</p>
+        <h1 class="blog-title">{$current_post.title} <span class="badge badge-primary">{$classify.name}</span></h1>
+        <p class="lead blog-description font-italic">{$current_post.intro}丨<code>{$current_post.create_time}</code></p>
     </div>
     <hr>
     <div class="row">
         <div class="col-sm-8 blog-main">
             <div class="blog-post">
-                <p class="blog-post-meta">{$post.create_time}</p>
                 <!--零时存放markdown数据-->
-                <textarea style="width: 300px;display: none">{$post.body}</textarea>
+                <textarea style="width: 300px;display: none">{$current_post.body}</textarea>
                 <div class="body">
 
                 </div>
@@ -26,23 +25,27 @@
                     $(".body").html(con.makeHtml($("textarea").text()));
                 </script>
             </div>
-
+            <hr>
             <nav>
                 <ul class="pager">
-                    <li><a href="#">上一篇：</a></li>
-                    <li><a href="#">下一篇：</a></li>
+                    {if $first_post!=null}
+                    <li>上一篇：<a href="/particulars/{$first_post.id}">{$first_post.title}</a></li>
+                    {/if}
+                    {if $last_post!=null}
+                    <li>下一篇：<a href="/particulars/{$last_post.id}">{$last_post.title}</a></li>
+                    {/if}
                 </ul>
             </nav>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module sidebar-module-inset">
-                <h4>关于{$post.classify_name}</h4>
+                <h4>关于{$classify.name}</h4>
                 <span>{$classify.introduce}</span>
-                <p><a target="_blank" href="{$classify.url|default=''}">{$classify.name|default=''}</a></p>
+                <p><a target="_blank" href="{$classify.url|default=''}">{$classify.name}</a></p>
             </div>
             <hr>
-            <div class="sidebar-module">
+            <!--<div class="sidebar-module">
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
                     <li><a href="#">March 2014</a></li>
@@ -66,7 +69,10 @@
                     <li><a href="#">Twitter</a></li>
                     <li><a href="#">Facebook</a></li>
                 </ol>
-            </div>
+            </div>-->
         </div>
     </div>
+
+    <hr>
+
 </div>

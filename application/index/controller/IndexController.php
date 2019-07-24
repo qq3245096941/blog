@@ -43,8 +43,20 @@ class IndexController extends Controller
      * 帖子详情
      */
     public function post_particulars(){
-        $post = Post::get(input('id'));
-        $classify = Classify::get(['id'=>$post->classify_id]);
-        return $this->assign('post',$post)->assign('classify',$classify)->fetch('particulars');
+        $post = new Post();
+        /*当前数据*/
+        $current_post = $post->where('id','=',input('id'))->limit(1)->find();
+        /*前一条数据*/
+        $first_post = $post->where('id',"<",input('id'))->limit(1)->find();
+
+        /*后一条数据*/
+        $last_post = $post->where('id',">",input('id'))->limit(1)->find();
+
+        /*当前帖子对应的类*/
+        $classify = Classify::get(['id'=>$current_post->classify_id]);
+
+        $this->assign('current_post',$current_post)->assign('first_post', $first_post)->assign('last_post',$last_post);
+
+        return $this->assign('classify',$classify)->fetch('particulars');
     }
 }

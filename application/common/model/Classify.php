@@ -15,4 +15,8 @@ class Classify extends Model
     {
         return count(Post::all(['classify_id' => $data['id']]));
     }
+
+    public function post_list(){
+        return $this->hasMany('Post');
+    }
 }
