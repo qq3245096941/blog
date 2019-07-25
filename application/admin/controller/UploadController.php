@@ -3,8 +3,14 @@
 
 namespace app\admin\controller;
 
-class UploadController extends BaseController
+use think\Controller;
+
+class UploadController extends Controller
 {
+    use \RequestIntercept;
+
+    protected $admin_methods = ['img'];
+
     /**
      * 文件上传
      */

@@ -14,6 +14,7 @@ use think\Session;
  */
 class UrlController extends Controller
 {
+    /*管理员账号密码*/
     private $user = ['email'=>"3245096941@qq.com",'password'=>'miao1995'];
 
     /**

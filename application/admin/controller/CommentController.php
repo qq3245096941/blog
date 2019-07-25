@@ -11,14 +11,13 @@ use think\Controller;
  * Class Comment
  * @package app\admin\controller
  */
-class CommentController extends BaseController
+class CommentController extends Controller
 {
-    protected function _initialize()
-    {
-        if (!request()->isAjax()) {
-            returnJson('请使用ajax提交', AJAX_SUBMIT);
-        }
-    }
+    use \RequestIntercept;
+
+    protected $ajax_methods = ['save'];
+
+    protected $admin_methods = ['delete'];
 
     /*保存评论*/
     public function save()
