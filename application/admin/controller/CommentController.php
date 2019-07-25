@@ -11,7 +11,7 @@ use think\Controller;
  * Class Comment
  * @package app\admin\controller
  */
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     protected function _initialize()
     {
