@@ -16,7 +16,6 @@ class BaseController extends Controller
                 json(["message" => '您没有登录', "status" => NO_ADMIN_AUTHORITY])->send();
                 exit();
             }
-
             $this->redirect('/admin');
         }
     }

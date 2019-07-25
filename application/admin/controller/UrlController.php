@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 use app\common\model\Classify;
+use app\common\model\Comment;
 use app\common\model\Post;
 use think\Controller;
 use think\Db;
@@ -89,6 +90,16 @@ class UrlController extends Controller
             $this->assign('post', $post)->assign('currentClassify',$currentClassify);
         }
         return $this->create_url('创建帖子', 'post', 'post/create');
+    }
+
+    /**
+     * 所有评论
+     */
+    public function comment_all(){
+        $comment = new Comment();
+        $comment_list = $comment->order('create_time','desc')->select();
+        $this->assign('comment_list',$comment_list);
+        return $this->create_url('评论管理','comment','comment/all');
     }
 
     /**

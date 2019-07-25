@@ -4,6 +4,7 @@
 namespace app\index\controller;
 
 use app\common\model\Classify;
+use app\common\model\Comment;
 use app\common\model\Post;
 use think\Controller;
 
@@ -55,8 +56,15 @@ class IndexController extends Controller
         /*当前帖子对应的类*/
         $classify = Classify::get(['id'=>$current_post->classify_id]);
 
-        $this->assign('current_post',$current_post)->assign('first_post', $first_post)->assign('last_post',$last_post);
+        /*当前帖子对应的评论*/
+        $comment_list = Comment::all(['post_id'=>$current_post->id]);
 
-        return $this->assign('classify',$classify)->fetch('particulars');
+        $this->assign('current_post',$current_post)
+             ->assign('first_post', $first_post)
+             ->assign('last_post',$last_post)
+             ->assign('comment_list',$comment_list) //评论
+             ->assign('classify',$classify);
+
+        return $this->fetch('particulars');
     }
 }

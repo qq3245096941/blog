@@ -1,0 +1,36 @@
+{layout name='base'}
+
+<div class="card">
+    <table class="table table-responsive table-hover">
+        <thead>
+        <tr>
+            <th>昵称</th>
+            <th>ip</th>
+            <th>内容</th>
+            <th>所属帖子</th>
+            <th>评论时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='comment_list' id='comment'}
+        <tr>
+            <td>{$comment.nickname}</td>
+            <td><span class="badge badge-primary">{$comment.ip}</span></td>
+            <td width="400">
+                <div class="well">
+                    {$comment.body}
+                </div>
+            </td>
+            <td>{$comment.post.title} <a target="_blank" href="/particulars/{$comment.post.id}" class="btn btn-success btn-xs">跳转前台查看</a></td>
+            <td>{$comment.create_time}</td>
+            <td>
+                <div class="btn-group-vertical">
+                    <a href="/admin/comment/delete/{$comment.id}" class="btn btn-danger">删除</a>
+                </div>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>

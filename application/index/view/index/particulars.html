@@ -2,18 +2,20 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><a href="/">主页</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{$current_post.title}</li>
+            <li class="breadcrumb-item active"><a href="/">主页</a></li>
+            <li class="breadcrumb-item active">{$current_post.title}</li>
         </ol>
     </nav>
 
     <div class="blog-header">
         <h1 class="blog-title">{$current_post.title} <span class="badge badge-primary">{$classify.name}</span></h1>
-        <p class="lead blog-description font-italic">{$current_post.intro}丨<code>{$current_post.create_time}</code></p>
+        <p style="margin-bottom: 0" class="lead blog-description font-italic">{$current_post.intro}</p>
+        <code>{$current_post.create_time}</code>
     </div>
     <hr>
     <div class="row">
         <div class="col-sm-8 blog-main">
+
             <div class="blog-post">
                 <!--零时存放markdown数据-->
                 <textarea style="width: 300px;display: none">{$current_post.body}</textarea>
@@ -21,8 +23,10 @@
 
                 </div>
                 <script>
-                    let con = new showdown.Converter();
+                    let con = new showdown.Converter({tables: true});
                     $(".body").html(con.makeHtml($("textarea").text()));
+
+                    $(".body table").addClass('table table-hover');
                 </script>
             </div>
             <hr>
@@ -36,6 +40,55 @@
                     {/if}
                 </ul>
             </nav>
+            <!--评论区-->
+            <div class="card">
+                <div class="card-header">
+                    <textarea class="form-control comment" rows="5" placeholder="请文明发言!"></textarea>
+                    <button type="button" class="btn btn-raised btn-primary btn-block submit_comment"
+                            style="margin-top: 5px">发表
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="list-group comment_list">
+                        {volist name='comment_list' id='comment'}
+                        <div class="list-group-item list-group-item-action  flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{$comment.body}</h5>
+                                <small>{$comment.create_time}</small>
+                            </div>
+                            <small class="badge badge-success">{$comment.nickname}</small>
+                        </div>
+                        {/volist}
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    $(".submit_comment").click(function () {
+                        /*通过ajax响应数据*/
+                        $.ajax({
+                            url: '/admin/comment/save',
+                            method:'post',
+                            data: {
+                                body: $(".comment").val(),
+                                post_id: "{$current_post.id}"
+                            },
+                            success(res) {
+                                let comment = JSON.parse(res).data;
+                                $(".comment_list").append(`
+                                   <a href="#" class="list-group-item list-group-item-action  flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${comment.body}</h5>
+                                            <small>${comment.create_time}</small>
+                                        </div>
+                                        <small class="badge badge-success" class="mb-1">${comment.nickname}</small>
+                                    </a>
+                                `)
+                            }
+                        })
+                    })
+                })
+            </script>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -72,7 +125,5 @@
             </div>-->
         </div>
     </div>
-
-    <hr>
-
 </div>
+<hr>

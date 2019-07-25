@@ -53,9 +53,9 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label">内容</label>
                     <div class="col-sm-11">
-                        <div class="col-sm-6" title="图片上传">
+                        <div class="col-sm-6">
                             <div style="margin-bottom: 5px">
-                                <span class="body_img_upload"><i class="ti-image"></i></span>
+                                <span class="body_img_upload icon"  title="图片上传"><i class="ti-image"></i></span>
                             </div>
                             <textarea class="col-md-12" name="body"
                                       placeholder="markdown语法">{$post['body']|default=''}</textarea>
@@ -103,7 +103,7 @@
 
     $(function () {
         /*首先解析markdown语法*/
-        let converter = new showdown.Converter();
+        let converter = new showdown.Converter({tables: true});
         refresh();
         $("textarea").on('input', function () {
             refresh();
@@ -121,7 +121,7 @@
             refresh()
         });
 
-        /*代码刷新*/
+        /*markdown语法刷新，保证每次修改内容，语法都被会编译，并且每次修改内容时，都需要调用此方法*/
         function refresh() {
             $(".html").html(converter.makeHtml($("textarea").val()));
             $(".html pre code").each((index, element) => {
@@ -133,7 +133,10 @@
             $(".html img").css({
                 "display":"block",
                 "width":"100%"
-            })
+            });
+
+            /*添加表格class*/
+            $(".html table").addClass('table table-responsive');
         }
 
         $('form').bootstrapValidator({

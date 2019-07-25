@@ -35,6 +35,13 @@ Route::group('admin/post',[
     'classify_id/[:id]'=>['admin/url/post_by_classify']
 ]);
 
+/*评论*/
+Route::group('admin/comment',[
+    'all'=>['admin/url/comment_all'],
+    'save'=>['admin/comment/save',['method'=>'post']],
+    'delete/:id'=>['admin/comment/delete']
+]);
+
 /*文件上传*/
 Route::group("upload",[
     /*图片*/
@@ -44,6 +51,7 @@ Route::group("upload",[
 /*前台首页*/
 Route::get("/","index/index/home");
 
+/*分页*/
 Route::get("page/[:page]",'index/index/home');
 
 /*帖子详情*/
