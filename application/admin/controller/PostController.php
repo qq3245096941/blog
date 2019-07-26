@@ -6,12 +6,11 @@ namespace app\admin\controller;
 use app\common\model\Post;
 use think\Controller;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
-
-    use \RequestIntercept;
-
-    protected $admin_methods = ['save','delete'];
+    protected $methods = [
+        'admin'=>['save','delete']
+    ];
 
     /*保存帖子*/
     public function save()

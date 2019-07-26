@@ -9,8 +9,7 @@ use think\Controller;
 class ClassifyController extends BaseController
 {
     protected $methods = [
-        'save'=>['admin'],
-        'delete'=>['admin']
+        'admin'=>['save','delete']
     ];
 
     /*创建，或者修改一个分类*/

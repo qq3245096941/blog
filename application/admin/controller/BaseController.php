@@ -3,7 +3,6 @@
 
 namespace app\admin\controller;
 
-
 use think\Controller;
 use think\Session;
 
@@ -13,30 +12,31 @@ class BaseController extends Controller
 
     protected function _initialize()
     {
-        /*判断当前方法是否存在于数组中*/
-        if (!in_array(request()->action(), $this->methods)) {
-            return;
-        }
+        /*操作方法名称*/
+        $action = request()->action();
+
         /**
          * ajax检测
          */
-        if($this->methods[request()->action()]['ajax']){
-            if (!request()->isAjax()) {
-                returnJson('请使用ajax提交', AJAX_SUBMIT);
-                exit();
+        if (array_key_exists('ajax', $this->methods)) {
+            if (in_array($action, $this->methods['ajax'])) {
+                if(!request()->isAjax()){
+                    returnJson('请使用ajax提交', AJAX_SUBMIT);
+                }
             }
-
         }
         /**
          * 管理员检测
          */
-        if($this->methods[request()->action()]['admin']){
-            if (Session::get('user') == null) {
-                if (request()->isAjax()) {
-                    json(["message" => '您没有登录', "status" => NO_ADMIN_AUTHORITY])->send();
-                    exit();
-                } else {
-                    $this->redirect('/admin');
+        if (array_key_exists('ajax', $this->methods)) {
+            if (in_array($action, $this->methods['admin'])) {
+                if (Session::get('user') == null) {
+                    /*是否是ajax请求*/
+                    if (request()->isAjax()) {
+                        returnJson('需要管理员权限，请登录', NO_ADMIN_AUTHORITY);
+                    } else {
+                        $this->redirect("/admin");
+                    }
                 }
             }
         }

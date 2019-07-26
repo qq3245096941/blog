@@ -11,4 +11,5 @@ define("AJAX_SUBMIT", 10003);//请使用ajax提交
 function returnJson($message = '', $status = NORMAL, $data = [])
 {
     json(['message' => $message, 'status' => $status, 'data' => $data])->send();
+    exit();
 }

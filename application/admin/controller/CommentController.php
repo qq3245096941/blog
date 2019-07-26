@@ -11,13 +11,12 @@ use think\Controller;
  * Class Comment
  * @package app\admin\controller
  */
-class CommentController extends Controller
+class CommentController extends BaseController
 {
-    use \RequestIntercept;
-
-    protected $ajax_methods = ['save'];
-
-    protected $admin_methods = ['delete'];
+    protected $methods = [
+        'ajax'=>['save'],
+        'admin'=>['delete']
+    ];
 
     /*保存评论*/
     public function save()

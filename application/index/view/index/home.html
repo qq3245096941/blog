@@ -2,23 +2,25 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10">
-            <div class="row">
-                {volist name='post_list' id='post'}
-                <div class="col-md-4">
-                    <div class="card" style="width: 19rem;">
-                        <img class="card-img-top" src="{$post.placeholder}">
-                        <div class="card-body">
-                            <h5 class="card-title">{$post.title}</h5>
-                            <p>
-                                <small>{$post.create_time}</small>
-                            </p>
+            {volist name='post_list' id='post'}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="{$post.placeholder}" alt="" style="width: 100%;">
+                        </div>
+                        <div class="col-sm-9">
+                            <span style="position: absolute;top: 5px;right: 10px;">{$post.create_time}</span>
+                            <h5 class="card-title">{$post.title}
+                                <small class="badge badge-success">{$post.classify_name}</small>
+                            </h5>
                             <p class="card-text">{$post.intro}</p>
                             <a href="/particulars/{$post.id}" class="btn btn-primary">查看详情</a>
                         </div>
                     </div>
                 </div>
-                {/volist}
             </div>
+            {/volist}
             <hr>
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -41,12 +43,24 @@
             <div class="btn-group-vertical btn-block">
                 {volist name='classify_list' id='classify'}
                 {switch $type = rand(1,6)}
-                    {case value='1'}<button type="button" class="btn btn-raised btn-primary">{$classify.name}</button>{/case}
-                    {case value='2'}<button type="button" class="btn btn-raised btn-secondary">{$classify.name}</button>{/case}
-                    {case value='3'}<button type="button" class="btn btn-raised btn-success">{$classify.name}</button>{/case}
-                    {case value='4'}<button type="button" class="btn btn-raised btn-info">{$classify.name}</button>{/case}
-                    {case value='5'}<button type="button" class="btn btn-raised btn-warning">{$classify.name}</button>{/case}
-                    {case value='6'}<button type="button" class="btn btn-raised btn-danger">{$classify.name}</button>{/case}
+                {case value='1'}
+                <button type="button" class="btn btn-raised btn-primary">{$classify.name}</button>
+                {/case}
+                {case value='2'}
+                <button type="button" class="btn btn-raised btn-secondary">{$classify.name}</button>
+                {/case}
+                {case value='3'}
+                <button type="button" class="btn btn-raised btn-success">{$classify.name}</button>
+                {/case}
+                {case value='4'}
+                <button type="button" class="btn btn-raised btn-info">{$classify.name}</button>
+                {/case}
+                {case value='5'}
+                <button type="button" class="btn btn-raised btn-warning">{$classify.name}</button>
+                {/case}
+                {case value='6'}
+                <button type="button" class="btn btn-raised btn-danger">{$classify.name}</button>
+                {/case}
                 {/switch}
                 {/volist}
             </div>
