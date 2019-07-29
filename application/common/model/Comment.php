@@ -10,7 +10,11 @@ class Comment extends Model
     protected $autoWriteTimestamp = true;
     protected $updateTime = false;
 
+
+    /**
+     * 创建一个表中不存在的字段，通过对象的post属性获取
+     */
     public function getPostAttr($data,$value){
-        return Post::get($value['post_id']);
+        return Post::get($value[$data]);
     }
 }
