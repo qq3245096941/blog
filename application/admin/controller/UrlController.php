@@ -39,7 +39,7 @@ class UrlController extends Controller
      */
     public function main()
     {
-        $this->assign("post_list",Post::all())->assign("classify_list",Classify::all());
+        $this->assign("post_list",Post::all())->assign("classify_list",Classify::all())->assign('comment_list',Comment::all());
         return $this->create_url('总览', 'main', 'main/index');
     }
 

@@ -63,12 +63,12 @@
         </a>
     </div>
     <div class="col-lg-3">
-        <a class="card statistics">
+        <a class="card statistics" href="/admin/comment/all">
             <div class="stat-widget-one">
-                <div class="stat-icon dib"><i class="ti-link color-danger border-danger"></i></div>
+                <div class="stat-icon dib"><i class="ti-comments color-danger border-danger"></i></div>
                 <div class="stat-content dib">
-                    <div class="stat-text">Referral</div>
-                    <div class="stat-digit">2,781</div>
+                    <div class="stat-text">评论</div>
+                    <div class="stat-digit">{$comment_list|count}</div>
                 </div>
             </div>
         </a>
@@ -79,16 +79,12 @@
     <div id="post" class="col-md-6" style="height:500px;"></div>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('post'));
+        let post = echarts.init(document.getElementById('post'));
 
-        myChart.setOption(option = {
+        post.setOption(option = {
             title: {
                 text: '帖子占比',
-                left: 'center',
-                top: 20,
-                textStyle: {
-                    color: '#ccc'
-                }
+                x: 'center',
             },
             tooltip: {
                 trigger: 'item',
@@ -103,7 +99,7 @@
             },
         });
 
-        myChart.setOption({
+        post.setOption({
             series: [
                 {
                     name: '帖子',
@@ -147,6 +143,35 @@
                 }
             ]
         });
+    </script>
+
+    <!--用户访问折线图-->
+    <div id="user" class="col-md-6" style="height:500px;"></div>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        let user = echarts.init(document.getElementById('user'));
+
+        let option = {
+            title:{
+              text:"用户访问表",
+                x:"center"
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [19, 33, 55, 27, 100, 40, 50],
+                type: 'line',
+                smooth: true,
+                itemStyle : { normal: {label : {show: true,color:"#000"}}}
+            }]
+        };
+        user.setOption(option);
+
     </script>
 </div>
 

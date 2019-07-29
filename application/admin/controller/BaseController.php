@@ -14,21 +14,21 @@ class BaseController extends Controller
     {
         /*操作方法名称*/
         $action = request()->action();
-
         /**
          * ajax检测
          */
         if (array_key_exists('ajax', $this->methods)) {
             if (in_array($action, $this->methods['ajax'])) {
-                if(!request()->isAjax()){
+                if (!request()->isAjax()) {
                     returnJson('请使用ajax提交', AJAX_SUBMIT);
                 }
             }
         }
+
         /**
          * 管理员检测
          */
-        if (array_key_exists('ajax', $this->methods)) {
+        if (array_key_exists('admin', $this->methods) == true) {
             if (in_array($action, $this->methods['admin'])) {
                 if (Session::get('user') == null) {
                     /*是否是ajax请求*/

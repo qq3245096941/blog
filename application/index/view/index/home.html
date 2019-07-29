@@ -1,7 +1,13 @@
 {layout name='base'}
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-10">
+            <div class="alert alert-danger" role="alert">
+                博客控制台已经开放，请点击<a href="/admin">控制台</a>，进入后台查看演示
+            </div>
+
             {volist name='post_list' id='post'}
             <div class="card">
                 <div class="card-body">
@@ -66,6 +72,4 @@
             </div>
         </div>
     </div>
-
-
 </div>
