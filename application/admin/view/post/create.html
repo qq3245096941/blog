@@ -110,13 +110,14 @@
         });
 
         /*封面图上传*/
-        obj.upload_img("#upload_img").then(img_url=>{
+        obj.picture_selector("#upload_img",(img_url)=>{
+            console.log(img_url);
             $("input[name='placeholder']").val(img_url);
             $(".cover").attr("src",img_url);
         });
 
         /*body图片上传*/
-        obj.upload_img(".body_img_upload").then(img_url=>{
+        obj.picture_selector(".body_img_upload",(img_url)=>{
             $("textarea").val($("textarea").val()+`\n![图片](${img_url})`);
             refresh()
         });

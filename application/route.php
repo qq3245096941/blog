@@ -44,8 +44,10 @@ Route::group('admin/comment',[
 
 /*文件上传*/
 Route::group("upload",[
-    /*图片*/
-    'img'=>'admin/upload/img'
+    'all'=>'admin/upload/all',
+    /*图片上传*/
+    'img'=>'admin/upload/img',
+    "delete/:id"=>'admin/upload/delete'
 ]);
 
 /*前台首页*/
