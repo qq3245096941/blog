@@ -34,14 +34,14 @@ function picture_selector(element, success) {
                             .picture_selector .img_div{
                                 display:inline-block;
                                 width:24%;
-                                background:#eee;
+                                background:#fff;
                                 height:150px;
                                 position:relative;
                                 margin:5px 0 0 5px;
                             }
                             
                             .picture_selector .img_div:hover{
-                                border:1px solid #000
+                                box-shadow: 1px 5px 10px #eee;
                             }
                             
                             .picture_selector .img_div img{
@@ -53,11 +53,6 @@ function picture_selector(element, success) {
                                 top:50%;
                                 left:50%;
                                 transform: translate(-50%,-50%);
-                            }
-                            
-                            .picture_selector .delete_img:hover{
-                                padding: 5px;
-                                border: 1px solid #000;
                             }
                          </style>`,
                 /*弹出后回调*/
@@ -73,7 +68,6 @@ function picture_selector(element, success) {
                         /*只显示图片文件*/
                         acceptMime: 'image/*',
                         done: function (res) {
-                            console.log(res);
                             if (res.status === 10001) {
                                 layer.msg(res.message);
                                 document.location = '/admin';
@@ -97,16 +91,16 @@ function picture_selector(element, success) {
         return `
             <div class="img_div">
                 <img data-id="${img.id}" class="upload_img" src="${img.url}">
-                <span class="ti-trash delete_img"></span>
+                <p class="btn btn-danger btn-block delete_img" style="position: absolute">删除</p>
             </div>`;
     }
 
     /*点击图片*/
     function click_img() {
         /*点击图片出现对勾图片*/
-        $(".upload_img").each((index, element) => {
+        $(".img_div").each((index, element) => {
             $(element).click(function () {
-                success($(this).attr("src"));
+                success($(this).children(".upload_img").attr("src"));
                 /*关闭所有弹框*/
                 layer.closeAll();
             })
@@ -121,6 +115,7 @@ function picture_selector(element, success) {
                     }
                 })
             }
+            event.stopPropagation();
         })
     }
 }

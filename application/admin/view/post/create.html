@@ -111,7 +111,6 @@
 
         /*封面图上传*/
         obj.picture_selector("#upload_img",(img_url)=>{
-            console.log(img_url);
             $("input[name='placeholder']").val(img_url);
             $(".cover").attr("src",img_url);
         });
